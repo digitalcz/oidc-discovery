@@ -1,11 +1,13 @@
 # OIDC Discovery
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE)
+[![Latest Stable Version](http://poser.pugx.org/digitalcz/oidc-discovery/v)](https://packagist.org/packages/digitalcz/oidc-discovery) 
+[![Total Downloads](http://poser.pugx.org/digitalcz/oidc-discovery/downloads)](https://packagist.org/packages/digitalcz/oidc-discovery) 
+[![Latest Unstable Version](http://poser.pugx.org/digitalcz/oidc-discovery/v/unstable)](https://packagist.org/packages/digitalcz/oidc-discovery) 
+[![License](http://poser.pugx.org/digitalcz/oidc-discovery/license)](https://packagist.org/packages/digitalcz/oidc-discovery) 
+[![PHP Version Require](http://poser.pugx.org/digitalcz/oidc-discovery/require/php)](https://packagist.org/packages/digitalcz/oidc-discovery)
 [![CI](https://github.com/digitalcz/oidc-discovery/workflows/CI/badge.svg)]()
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/badges/quality-score.png?b=0.x)](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/?branch=0.x)
 [![codecov](https://codecov.io/gh/digitalcz/oidc-discovery/branch/0.x/graph/badge.svg?token=e8B81l7mzA)](https://codecov.io/gh/digitalcz/oidc-discovery)
-[![Total Downloads][ico-downloads]][link-downloads]
 
 PHP implementation of https://openid.net/specs/openid-connect-discovery-1_0.html
 
@@ -86,11 +88,5 @@ If you discover any security related issues, please email devs@digital.cz instea
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/digitalcz/oidc-discovery.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/digitalcz/oidc-discovery.svg?style=flat-square
-
-[link-packagist]: https://packagist.org/packages/digitalcz/oidc-discovery
-[link-downloads]: https://packagist.org/packages/digitalcz/oidc-discovery
 [link-author]: https://github.com/digitalcz
 [link-contributors]: ../../contributors
