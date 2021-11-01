@@ -19,8 +19,36 @@ $ composer require digitalcz/oidc-discovery
 
 ## Usage
 
+If `php-http/discovery` package is present, DiscoveryFactory will use it to find PSR18 client and PSR17 factory.
+
 ```php
-// TODO
+use DigitalCz\OpenIDConnect\Discovery\DiscovererFactory;
+
+$discoverer = DiscovererFactory::create()
+$providerMetadata = $discoverer->discover('https://accounts.google.com/.well-known/openid-configuration');
+$issuer = $providerMetadata->issuer(); // https://accounts.google.com
+$tokenEndpoint = $providerMetadata->tokenEndpoint(); // https://oauth2.googleapis.com/token
+```
+
+otherwise, you can provide these manually 
+```php
+use DigitalCz\OpenIDConnect\Discovery\DiscovererFactory;
+use Http\Client\Curl\Client;
+use Nyholm\Psr7\Factory\Psr17Factory;
+
+$client = new Client();
+$requestFactory = new Psr17Factory();
+$discoverer = DiscovererFactory::create($client, $requestFactory);
+```
+
+### Add cache to avoid unnecessary calls
+```php
+use DigitalCz\OpenIDConnect\Discovery\DiscovererFactory;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter
+use Symfony\Component\Cache\Psr16Cache;
+
+$cache = new Psr16Cache(new FilesystemAdapter())
+$discoverer = DiscovererFactory::create(cache: $cache, cacheTtl: 1800);
 ```
 
 See [examples](examples) for more

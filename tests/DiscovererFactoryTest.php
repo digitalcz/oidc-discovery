@@ -19,8 +19,7 @@ class DiscovererFactoryTest extends TestCase
 {
     public function testCreateWithDiscovery(): void
     {
-        $factory = new DiscovererFactory();
-        $discoverer = $factory->create();
+        $discoverer = DiscovererFactory::create();
 
         self::assertInstanceOf(Client::class, NSA::getProperty($discoverer, 'client'));
         self::assertInstanceOf(Psr17Factory::class, NSA::getProperty($discoverer, 'requestFactory'));
@@ -32,8 +31,7 @@ class DiscovererFactoryTest extends TestCase
         $requestFactory = new Psr17Factory();
         $cache = new Psr16Cache(new NullAdapter());
 
-        $factory = new DiscovererFactory($client, $requestFactory, $cache);
-        $cachedDiscoverer = $factory->create();
+        $cachedDiscoverer = DiscovererFactory::create($client, $requestFactory, $cache);
 
         self::assertInstanceOf(CachedDiscoverer::class, $cachedDiscoverer);
         self::assertSame($cache, NSA::getProperty($cachedDiscoverer, 'cache'));

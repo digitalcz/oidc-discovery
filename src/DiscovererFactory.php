@@ -13,29 +13,25 @@ use Psr\SimpleCache\CacheInterface;
 
 final class DiscovererFactory
 {
-    public function __construct(
-        private ?ClientInterface $client = null,
-        private ?RequestFactoryInterface $requestFactory = null,
-        private ?CacheInterface $cache = null,
-        private int $cacheTtl = CachedDiscoverer::DEFAULT_TTL
-    ) {
-    }
+    public static function create(
+        ?ClientInterface $client = null,
+        ?RequestFactoryInterface $requestFactory = null,
+        ?CacheInterface $cache = null,
+        int $cacheTtl = CachedDiscoverer::DEFAULT_TTL
+    ): Discoverer {
+        $client ??= self::discoverClient();
+        $requestFactory ??= self::discoverRequestFactory();
 
-    public function create(): Discoverer
-    {
-        $discoverer = new HttpDiscoverer(
-            $this->client ?? $this->discoverClient(),
-            $this->requestFactory ?? $this->discoverRequestFactory()
-        );
+        $discoverer = new HttpDiscoverer($client, $requestFactory);
 
-        if ($this->cache !== null) {
-            $discoverer = new CachedDiscoverer($discoverer, $this->cache, $this->cacheTtl);
+        if ($cache !== null) {
+            $discoverer = new CachedDiscoverer($discoverer, $cache, $cacheTtl);
         }
 
         return $discoverer;
     }
 
-    private function discoverClient(): ClientInterface
+    private static function discoverClient(): ClientInterface
     {
         if (class_exists(Psr18ClientDiscovery::class)) {
             return Psr18ClientDiscovery::find();
@@ -44,7 +40,7 @@ final class DiscovererFactory
         throw new LogicException('Unable to discover ' . ClientInterface::class);
     }
 
-    private function discoverRequestFactory(): RequestFactoryInterface
+    private static function discoverRequestFactory(): RequestFactoryInterface
     {
         if (class_exists(Psr17FactoryDiscovery::class)) {
             return Psr17FactoryDiscovery::findRequestFactory();
