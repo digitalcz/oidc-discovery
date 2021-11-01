@@ -19,10 +19,10 @@ final class CachedDiscoverer implements Discoverer
 
     public function discover(string $uri): ProviderMetadata
     {
-        $key = self::class . $uri;
+        $key = 'oidc_discoverer_' . $uri;
 
         if ($this->cache->has($key)) {
-            $this->cache->get($key);
+            return $this->cache->get($key);
         }
 
         $metadata = $this->inner->discover($uri);
