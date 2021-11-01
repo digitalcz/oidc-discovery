@@ -3,8 +3,8 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![CI](https://github.com/digitalcz/oidc-discovery/workflows/CI/badge.svg)]()
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/?branch=1.x)
-[![codecov](https://codecov.io/gh/digitalcz/oidc-discovery/branch/master/graph/badge.svg)](https://codecov.io/gh/digitalcz/oidc-discovery)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/badges/quality-score.png?b=0.x)](https://scrutinizer-ci.com/g/digitalcz/oidc-discovery/?branch=0.x)
+[![codecov](https://codecov.io/gh/digitalcz/oidc-discovery/branch/0.x/graph/badge.svg?token=e8B81l7mzA)](https://codecov.io/gh/digitalcz/oidc-discovery)
 [![Total Downloads][ico-downloads]][link-downloads]
 
 PHP implementation of https://openid.net/specs/openid-connect-discovery-1_0.html
