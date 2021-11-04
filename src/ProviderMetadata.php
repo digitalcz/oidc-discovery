@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace DigitalCz\OpenIDConnect\Discovery;
 
+use DigitalCz\OpenIDConnect\Discovery\Traits\ParametersTrait;
 use JsonSerializable;
 
 final class ProviderMetadata implements JsonSerializable
 {
-    use MetadataTrait;
+    use ParametersTrait;
+
+    private JWKs $JWKs;
 
     /** @param array<string, mixed> $metadata */
-    public function __construct(array $metadata)
+    public function __construct(array $metadata, JWKs $JWKs)
     {
-        $this->metadata = $metadata;
+        $this->parameters = $metadata;
+        $this->JWKs = $JWKs;
     }
 
     public function issuer(): string
@@ -211,5 +215,10 @@ final class ProviderMetadata implements JsonSerializable
     public function opTosUri(): string
     {
         return $this->get('op_tos_uri');
+    }
+
+    public function getJWKs(): JWKs
+    {
+        return $this->JWKs;
     }
 }

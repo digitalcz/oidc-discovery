@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace DigitalCz\OpenIDConnect\Discovery;
+namespace DigitalCz\OpenIDConnect\Discovery\Traits;
 
 use DigitalCz\OpenIDConnect\Discovery\Exception\MetadataException;
 
-trait MetadataTrait
+trait ParametersTrait
 {
     /** @var array<string, mixed> */
-    private array $metadata = [];
+    private array $parameters = [];
 
     public function has(string $key): bool
     {
-        return isset($this->metadata[$key]);
+        return isset($this->parameters[$key]);
     }
 
     public function get(string $key, mixed $default = null): mixed
     {
-        return $this->metadata[$key] ?? $default;
+        return $this->parameters[$key] ?? $default;
     }
 
     public function ensure(string $key): mixed
@@ -29,7 +29,7 @@ trait MetadataTrait
     /** @return array<string, mixed> */
     public function all(): array
     {
-        return $this->metadata;
+        return $this->parameters;
     }
 
     /** @return array<string, mixed> */

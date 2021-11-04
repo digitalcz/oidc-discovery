@@ -8,15 +8,15 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \DigitalCz\OpenIDConnect\Discovery\ProviderMetadata
- * @covers \DigitalCz\OpenIDConnect\Discovery\MetadataTrait
+ * @covers \DigitalCz\OpenIDConnect\Discovery\Traits\ParametersTrait
  */
 class ProviderMetadataTest extends TestCase
 {
     public function testMethods(): void
     {
-        $config = (string)file_get_contents(TESTS_DIR . '/configuration.json');
+        $config = (string)file_get_contents(TESTS_DIR . '/Dummy/configuration.json');
         $values = json_decode($config, true, 512, JSON_THROW_ON_ERROR);
-        $metadata = new ProviderMetadata($values);
+        $metadata = new ProviderMetadata($values, new JWKs([]));
 
         self::assertSame('https://accounts.google.com', $metadata->issuer());
         self::assertSame('https://accounts.google.com/o/oauth2/v2/auth', $metadata->authorizationEndpoint());

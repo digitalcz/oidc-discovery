@@ -21,6 +21,17 @@ final class HttpDiscoverer implements Discoverer
      */
     public function discover(string $uri): ProviderMetadata
     {
+        $configuration = $this->sendRequest($uri);
+        $jwks = $this->sendRequest($configuration['jwks_uri']);
+
+        return new ProviderMetadata($configuration, JWKs::fromArray($jwks));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function sendRequest(string $uri): array
+    {
         $request = $this->requestFactory->createRequest('GET', $uri);
 
         try {
@@ -32,15 +43,13 @@ final class HttpDiscoverer implements Discoverer
         $statusCode = $response->getStatusCode();
 
         if ($statusCode !== 200) {
-            throw new DiscoveryException('Bad response status code ' . $response->getStatusCode());
+            throw new DiscoveryException('Bad response status code ' . $response->getStatusCode() . ' on ' . $uri);
         }
 
         try {
-            $result = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
-            throw new DiscoveryException('Unable to parse response', $e->getCode(), $e);
+            throw new DiscoveryException('Unable to parse response from ' . $uri, $e->getCode(), $e);
         }
-
-        return new ProviderMetadata($result);
     }
 }

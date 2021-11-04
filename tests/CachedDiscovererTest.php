@@ -19,7 +19,7 @@ class CachedDiscovererTest extends TestCase
         $innerDiscoverer->expects(self::once())
             ->method('discover')
             ->with(self::equalTo('https://example.com/.well-known/openid-configuration'))
-            ->willReturn(new ProviderMetadata(['issuer' => 'https://example.com']));
+            ->willReturn(new ProviderMetadata(['issuer' => 'https://example.com'], new JWKs([])));
 
         $cache = new Psr16Cache(new ArrayAdapter());
         $cachedDiscoverer = new CachedDiscoverer($innerDiscoverer, $cache);
