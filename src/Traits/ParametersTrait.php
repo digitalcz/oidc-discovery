@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DigitalCz\OpenIDConnect\Discovery\Traits;
 
-use DigitalCz\OpenIDConnect\Discovery\Exception\MetadataException;
+use RuntimeException;
 
 trait ParametersTrait
 {
@@ -23,7 +23,7 @@ trait ParametersTrait
 
     public function ensure(string $key): mixed
     {
-        return $this->get($key) ?? MetadataException::missing($key);
+        return $this->get($key) ?? throw new RuntimeException("Missing key \"$key\"");
     }
 
     /** @return array<string, mixed> */
